@@ -31,6 +31,10 @@ class NewToDoForm extends Component {
         }
 
         this.props.addTodo(data)
+        this.setState({
+            contentInput: '',
+            priorityInput: ''
+        })
     }
 
     render(){
@@ -39,11 +43,11 @@ class NewToDoForm extends Component {
               <form className="todo-body">
                   <div className="form-group">
                     <label htmlFor="content-input">Content</label>
-                    <input type="text" className="form-control" id="content-input" onChange={this.handleContentChange}/>
+                    <input type="text" className="form-control" id="content-input" value={this.state.contentInput} onChange={this.handleContentChange}/>
                   </div>
                   <div className="form-group">
                     <label htmlFor="priority-input">Priority</label>
-                    <input type="text" className="form-control" id="priority-input" onChange={this.handlePriortyChange}/>
+                    <input type="text" className="form-control" id="priority-input" value={this.state.priorityInput} onChange={this.handlePriortyChange}/>
                   </div>
                   <button type="submit" className="btn btn-primary" onClick={this.handleAdd}>Add</button>
               </form>
