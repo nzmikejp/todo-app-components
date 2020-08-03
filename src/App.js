@@ -42,7 +42,17 @@ class App extends Component {
     })
   }
 
-  removeTodo = () => {}
+  removeTodo = (id) => {
+    var todos = this.state.todos
+    var filtered = todos.filter((item)=>{
+      return item.id != id
+    })
+
+    this.setState({
+      todos: filtered
+    })
+  }
+
   updateTodo = () => {}
   
   render(){
@@ -55,17 +65,17 @@ class App extends Component {
 
                 var todoProps = {
                   key: todo.id,
+                  removeTodo: this.removeTodo, //this is a variable that we are going to pass through props to child todo.
                   ...todo
                 }
 
                 return (
-                  <ToDo {...todoProps} />
-
+                  <ToDo {...todoProps} /> //sending through props to todo
                 )
               })
             }
 
-            <NewToDoForm addTodo={this.addTodo}/>
+            <NewToDoForm addTodo={this.addTodo} />
           </div>
         </div>
       </div>
