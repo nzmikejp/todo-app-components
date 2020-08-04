@@ -53,7 +53,16 @@ class App extends Component {
     })
   }
 
-  updateTodo = () => {}
+  updateTodo = (id, data) => {
+    var todos = this.state.todos
+    var updated = todos.map((item)=>{
+      return (item.id == id) ? {...item,...data} : item
+    })
+
+    this.setState({
+      todos: updated
+    })
+  }
   
   render(){
     return (
