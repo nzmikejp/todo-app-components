@@ -8,7 +8,9 @@ class ToDo extends Component {
         this.state = {
 
             isContentUpdating: false,
-            contentInput: this.props.content
+            isPriorityUpdating: false,
+            contentInput: this.props.content,
+            priorityInput: this.props.priority
         }
     }
 
@@ -24,7 +26,7 @@ class ToDo extends Component {
             content: this.state.contentInput
         }
         this.props.updateTodo(id, data)
-        
+
         this.setState({
             isContentUpdating: false
         })
@@ -41,6 +43,29 @@ class ToDo extends Component {
         this.props.removeTodo(id)
     }
 
+    handlePriorityDoubleClick = (e) => {
+        this.setState({
+            isPriorityUpdating: true
+        })
+    }
+
+    handlePriorityInputBlur = (e) => {
+        var id = this.props.id
+        var data = {
+            priority: this.state.priorityInput
+        }
+        this.props.updateTodo(id, data)
+
+        this.setState({
+            isPriorityUpdating: false
+        })
+    }
+
+    handlePriorityInputChange = (e) => {
+        this.setState({
+            priorityInput: e.target.value
+        })
+    }
 
     render(){
         return (
@@ -54,8 +79,12 @@ class ToDo extends Component {
                        ) : this.props.content
                     }
                 </div>
-                <div className="todo-priority">
-                    {this.props.priority}
+                <div className="todo-priority" onDoubleClick={this.handlePriorityDoubleClick}>
+                    {
+                        this.state.isPriorityUpdating === true ? (
+                            <input type="text" className="form-control" value={this.state.priorityInput} onChange={this.handlePriorityInputChange} onBlur={this.handlePriorityInputBlur} /> 
+                        ) : this.props.priority
+                    }
                 </div>
               </div>
             </div>
