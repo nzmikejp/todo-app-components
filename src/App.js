@@ -75,6 +75,7 @@ class App extends Component {
                 var todoProps = {
                   key: todo.id,
                   removeTodo: this.removeTodo, //this is a variable that we are going to pass through props to child todo.
+                  updateTodo: this.updateTodo,
                   ...todo
                 }
 
